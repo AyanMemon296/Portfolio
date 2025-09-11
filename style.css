@@ -939,6 +939,11 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+  .hero-section {
+    padding-top: 80px;
+  }
+
   .nav-menu {
     position: fixed;
     left: -100%;
