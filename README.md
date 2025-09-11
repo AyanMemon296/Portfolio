@@ -12,7 +12,7 @@
 
 - 📂 **Project Showcase** with descriptions
 - 📝 **Skills & Experience** summary
-- 📧 **Contact Form** integrated with Web3Forms
+- 📧 **Contact Form** integrated with formsubmit.co
 - 📱 Fully **responsive design** for desktop and mobile
 - 🎨 **Smooth animations** and modern UI
 - ☁️ Hosted for free using **GitHub Pages**
