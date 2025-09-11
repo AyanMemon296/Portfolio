@@ -1,5 +1,35 @@
+/*
+| =================================================================
+| TABLE OF CONTENTS
+| =================================================================
+|
+| 1.  VARIABLES & THEME CONFIGURATION
+| 2.  BASE & RESET STYLES
+| 3.  REUSABLE COMPONENTS & UTILITIES
+|       - Particle Background
+|       - Main Content Container
+|       - General Button Styles
+|       - General Section Styles
+| 4.  HEADER & NAVBAR
+| 5.  HERO SECTION
+| 6.  ABOUT SECTION
+| 7.  PROJECTS SECTION
+| 8.  SKILLS SECTION
+| 9.  CONTACT SECTION
+| 10. FOOTER
+| 11. MODAL (POP-UP)
+| 12. KEYFRAME ANIMATIONS
+| 13. RESPONSIVE DESIGN (MEDIA QUERIES)
+| 14. MISCELLANEOUS STYLES
+|
+| =================================================================
+*/
+
+/* =================================================================
+   1. VARIABLES & THEME CONFIGURATION
+   ================================================================= */
 :root {
-  /* AI/JARVIS Theme Colors */
+  /* --- Color Palette --- */
   --ai-primary: #00BFFF;
   --ai-secondary: #306998;
   --ai-accent: #FFD43B;
@@ -10,22 +40,22 @@
   --ai-text-secondary: rgba(224, 246, 255, 0.7);
   --ai-border: rgba(0, 191, 255, 0.3);
   --ai-hover: rgba(0, 191, 255, 0.1);
-  --ai-grid: rgba(0, 191, 255, 0.03); 
-
-  /* Re-adding black/white for button text consistency */
+  --ai-grid: rgba(0, 191, 255, 0.03);
   --color-black: rgba(0, 0, 0, 1);
   --color-white: rgba(255, 255, 255, 1);
 
-  /* Typography */
+  /* --- Typography --- */
   --font-orbitron: 'Orbitron', monospace;
   --font-exo: 'Exo 2', sans-serif;
-  
-  /* Animations */
+
+  /* --- Transitions & Animations --- */
   --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Base Styles */
+/* =================================================================
+   2. BASE & RESET STYLES
+   ================================================================= */
 * {
   margin: 0;
   padding: 0;
@@ -39,21 +69,24 @@ html {
 
 body {
   font-family: var(--font-exo);
-  background-color: #000815; /* Fallback color */
-  /* MODIFIED: Increased grid size from 40px to 60px */
-  background-image: 
-      /* Grid pattern */
-      repeating-linear-gradient(0deg, var(--ai-grid), var(--ai-grid) 1px, transparent 1px, transparent 60px),
-      repeating-linear-gradient(90deg, var(--ai-grid), var(--ai-grid) 1px, transparent 1px, transparent 60px),
-      /* Original gradient */
-      linear-gradient(135deg, #000510 0%, #001122 50%, #000815 100%);
+  background-color: #000815;
+  /* Fallback color */
+  background-image:
+    /* Grid pattern overlay */
+    repeating-linear-gradient(0deg, var(--ai-grid), var(--ai-grid) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(90deg, var(--ai-grid), var(--ai-grid) 1px, transparent 1px, transparent 60px),
+    /* Base background gradient */
+    linear-gradient(135deg, #000510 0%, #001122 50%, #000815 100%);
   color: var(--ai-text-primary);
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
 }
 
-/* Particle Background */
+/* =================================================================
+   3. REUSABLE COMPONENTS & UTILITIES
+   ================================================================= */
+/* --- Particle Background --- */
 #particle-canvas {
   position: fixed;
   top: 0;
@@ -63,14 +96,105 @@ body {
   z-index: -1;
 }
 
-/* Container */
+/* --- Main Content Container --- */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-/* Navbar */
+/* --- General Button Styles --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition-standard);
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: var(--transition-standard);
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: var(--ai-primary);
+  color: var(--color-black);
+  border-color: var(--ai-primary);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--ai-primary);
+  box-shadow: 0 0 20px var(--ai-glow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ai-primary);
+  border-color: var(--ai-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--ai-primary);
+  color: var(--color-black);
+  box-shadow: 0 0 20px var(--ai-glow);
+}
+
+.btn-full-width {
+  width: 100%;
+  justify-content: center;
+}
+
+/* --- General Section Styles --- */
+section {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-title {
+  font-family: var(--font-orbitron);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--ai-primary);
+  text-align: center;
+  margin-bottom: 3rem;
+  text-shadow: 0 0 10px var(--ai-glow);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--ai-primary), transparent);
+  transform: translateX(-50%);
+}
+
+/* =================================================================
+   4. HEADER & NAVBAR
+   ================================================================= */
 .navbar {
   position: fixed;
   top: 0;
@@ -100,6 +224,7 @@ body {
   text-shadow: 0 0 10px var(--ai-glow);
 }
 
+/* --- Navigation Links --- */
 .nav-menu {
   display: flex;
   list-style: none;
@@ -138,6 +263,7 @@ body {
   width: 100%;
 }
 
+/* --- Mobile Hamburger Icon --- */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -152,7 +278,9 @@ body {
   transition: var(--transition-standard);
 }
 
-/* Hero Section */
+/* =================================================================
+   5. HERO SECTION
+   ================================================================= */
 .hero-section {
   min-height: 100vh;
   display: flex;
@@ -172,6 +300,7 @@ body {
   padding: 0 2rem;
 }
 
+/* --- Hero Content (Left) --- */
 .hero-content {
   z-index: 2;
 }
@@ -225,6 +354,7 @@ body {
   animation: fadeInUp 1s ease-out 1s forwards;
 }
 
+/* --- Hero Visual (Right) --- */
 .hero-visual {
   display: flex;
   justify-content: center;
@@ -233,6 +363,7 @@ body {
   animation: fadeInUp 1s ease-out 1.2s forwards;
 }
 
+/* --- AI Circle Animation --- */
 .ai-circle {
   position: relative;
   width: 300px;
@@ -277,96 +408,9 @@ body {
   animation: rotate 20s linear infinite;
 }
 
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border: 2px solid;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: var(--transition-standard);
-  cursor: pointer;
-  font-size: 1rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  transition: var(--transition-standard);
-}
-
-.btn:hover::before {
-  left: 100%;
-}
-
-.btn-primary {
-  background: var(--ai-primary);
-  color: var(--color-black);
-  border-color: var(--ai-primary);
-}
-
-.btn-primary:hover {
-  background: transparent;
-  color: var(--ai-primary);
-  box-shadow: 0 0 20px var(--ai-glow);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--ai-primary);
-  border-color: var(--ai-primary);
-}
-
-.btn-secondary:hover {
-  background: var(--ai-primary);
-  color: var(--color-black);
-  box-shadow: 0 0 20px var(--ai-glow);
-}
-
-.btn-full-width {
-  width: 100%;
-  justify-content: center;
-}
-
-/* Sections */
-section {
-  padding: 6rem 0;
-  position: relative;
-}
-
-.section-title {
-  font-family: var(--font-orbitron);
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--ai-primary);
-  text-align: center;
-  margin-bottom: 3rem;
-  text-shadow: 0 0 10px var(--ai-glow);
-  position: relative;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  width: 100px;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--ai-primary), transparent);
-  transform: translateX(-50%);
-}
-
-/* About Section */
+/* =================================================================
+   6. ABOUT SECTION
+   ================================================================= */
 .about-content {
   display: flex;
   flex-direction: column;
@@ -387,6 +431,7 @@ section {
   margin-right: auto;
 }
 
+/* --- Reusable Card for About Section --- */
 .about-card {
   background: var(--ai-card-bg);
   border: 1px solid var(--ai-border);
@@ -438,15 +483,22 @@ section {
   color: var(--ai-primary);
 }
 
-.education-item h4 {
+/* --- Specific Cards: Education, Internships etc. --- */
+.education-item h4,
+.internship-item h4 {
   color: var(--ai-text-primary);
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 
-.institution {
+.institution,
+.company {
   color: var(--ai-accent);
   font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.institution {
   margin-bottom: 1rem;
 }
 
@@ -470,18 +522,6 @@ section {
 
 .internship-item:last-child {
   margin-bottom: 0;
-}
-
-.internship-item h4 {
-  color: var(--ai-text-primary);
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.company {
-  color: var(--ai-accent);
-  font-weight: 600;
-  margin-bottom: 0.25rem;
 }
 
 .duration {
@@ -539,19 +579,22 @@ section {
   border-color: var(--ai-border);
 }
 
-/* Projects Section --- UPDATED STYLES START HERE --- */
+/* =================================================================
+   7. PROJECTS SECTION
+   ================================================================= */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
 }
 
+/* --- Project Card --- */
 .project-card {
   background: var(--ai-card-bg);
   border: 1px solid var(--ai-border);
   border-radius: 12px;
   padding: 2rem;
-  transition: all 0.3s ease; /* Use 'all' for smoother transform transition */
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -561,18 +604,13 @@ section {
 .project-card:hover {
   border-color: var(--ai-primary);
   box-shadow: 0 15px 40px rgba(0, 191, 255, 0.2);
-  /* The transform is now handled by JavaScript */
-}
-
-.project-header {
-  margin-bottom: 1rem;
 }
 
 .project-header h3 {
-  color: var(--ai-accent); /* CHANGED to accent color */
+  color: var(--ai-accent);
   font-size: 1.4rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .project-description {
@@ -580,6 +618,7 @@ section {
   line-height: 1.6;
   margin-bottom: 1.5rem;
   flex-grow: 1;
+  /* Pushes tech stack and links to the bottom */
 }
 
 .tech-stack {
@@ -601,7 +640,7 @@ section {
 .project-links {
   display: flex;
   gap: 1rem;
-  margin-top: 1.5rem; /* Pushes links to the bottom */
+  margin-top: 1.5rem;
 }
 
 .project-link {
@@ -626,8 +665,9 @@ section {
   border-color: var(--ai-primary);
 }
 
-
-/* Skills Section */
+/* =================================================================
+   8. SKILLS SECTION
+   ================================================================= */
 .skills-category {
   margin-bottom: 3rem;
 }
@@ -686,7 +726,9 @@ section {
   font-size: 0.9rem;
 }
 
-/* Contact Section */
+/* =================================================================
+   9. CONTACT SECTION
+   ================================================================= */
 .contact-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -696,6 +738,7 @@ section {
   align-items: start;
 }
 
+/* --- Contact Form Styles --- */
 .contact-form {
   background: var(--ai-card-bg);
   padding: 2rem;
@@ -731,19 +774,7 @@ section {
   box-shadow: 0 0 10px var(--ai-glow);
 }
 
-.error-message {
-  color: var(--color-red-400);
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
-  display: block;
-  opacity: 0;
-  transition: var(--transition-standard);
-}
-
-.error-message.show {
-  opacity: 1;
-}
-
+/* --- Social Links Styles --- */
 .social-links-container h3 {
   font-family: var(--font-orbitron);
   color: var(--ai-primary);
@@ -764,69 +795,71 @@ section {
 }
 
 .social-link {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.75rem 1rem;
-    background: var(--ai-card-bg);
-    border: 1px solid var(--ai-border);
-    border-radius: 8px;
-    color: var(--ai-text-primary);
-    text-decoration: none;
-    transition: var(--transition-standard);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--ai-card-bg);
+  border: 1px solid var(--ai-border);
+  border-radius: 8px;
+  color: var(--ai-text-primary);
+  text-decoration: none;
+  transition: var(--transition-standard);
 }
 
 .social-link:hover {
-    border-color: var(--ai-primary);
-    box-shadow: 0 5px 15px rgba(0, 191, 255, 0.1);
-    transform: translateY(-3px);
+  border-color: var(--ai-primary);
+  box-shadow: 0 5px 15px rgba(0, 191, 255, 0.1);
+  transform: translateY(-3px);
 }
 
 .social-link:hover .social-external-icon {
-    transform: translate(5px, -5px);
-    color: var(--ai-primary);
+  transform: translate(5px, -5px);
+  color: var(--ai-primary);
 }
 
 .social-icon-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(0, 191, 255, 0.1);
-    border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 191, 255, 0.1);
+  border-radius: 50%;
 }
 
 .social-icon-wrapper i {
-    font-size: 1.2rem;
-    color: var(--ai-primary);
+  font-size: 1.2rem;
+  color: var(--ai-primary);
 }
 
 .social-details {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .social-platform {
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--ai-text-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ai-text-primary);
 }
 
 .social-handle {
-    font-size: 0.85rem;
-    color: var(--ai-text-secondary);
-    word-break: break-all;
+  font-size: 0.85rem;
+  color: var(--ai-text-secondary);
+  word-break: break-all;
 }
 
 .social-external-icon {
-    font-size: 0.9rem;
-    color: var(--ai-text-secondary);
-    transition: var(--transition-standard);
+  font-size: 0.9rem;
+  color: var(--ai-text-secondary);
+  transition: var(--transition-standard);
 }
 
-/* Footer */
+/* =================================================================
+   10. FOOTER
+   ================================================================= */
 .footer {
   background: var(--ai-dark-bg);
   border-top: 1px solid var(--ai-border);
@@ -839,7 +872,9 @@ section {
   margin-bottom: 0.5rem;
 }
 
-/* Modal */
+/* =================================================================
+   11. MODAL (POP-UP)
+   ================================================================= */
 .modal {
   position: fixed;
   top: 0;
@@ -861,6 +896,10 @@ section {
   visibility: visible;
 }
 
+.modal.show .modal-content {
+  transform: scale(1);
+}
+
 .modal.hidden {
   opacity: 0;
   visibility: hidden;
@@ -877,18 +916,10 @@ section {
   transition: var(--transition-standard);
 }
 
-.modal.show .modal-content {
-  transform: scale(1);
-}
-
-.modal-header {
-  margin-bottom: 1rem;
-}
-
 .modal-header i {
   font-size: 3rem;
   color: var(--ai-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .modal-header h3 {
@@ -896,12 +927,15 @@ section {
   font-family: var(--font-orbitron);
 }
 
-/* Animations */
+/* =================================================================
+   12. KEYFRAME ANIMATIONS
+   ================================================================= */
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -909,10 +943,13 @@ section {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.1);
     opacity: 0.8;
@@ -923,23 +960,17 @@ section {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-@keyframes typewriter {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-/* Responsive Design */
+/* =================================================================
+   13. RESPONSIVE DESIGN (MEDIA QUERIES)
+   ================================================================= */
+/* --- Medium Devices (Tablets, smaller desktops) --- */
 @media (max-width: 768px) {
-
   .hero-section {
     padding-top: 80px;
   }
@@ -994,6 +1025,7 @@ section {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
 
   .ai-circle {
@@ -1001,9 +1033,20 @@ section {
     height: 200px;
   }
 
-  .orbit-1 { width: 150px; height: 150px; }
-  .orbit-2 { width: 175px; height: 175px; }
-  .orbit-3 { width: 200px; height: 200px; }
+  .orbit-1 {
+    width: 150px;
+    height: 150px;
+  }
+
+  .orbit-2 {
+    width: 175px;
+    height: 175px;
+  }
+
+  .orbit-3 {
+    width: 200px;
+    height: 200px;
+  }
 
   .container {
     padding: 0 1rem;
@@ -1029,13 +1072,9 @@ section {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
-
-  .hero-buttons {
-    flex-direction: column;
-    gap: 1rem;
-  }
 }
 
+/* --- Small Devices (Mobile Phones) --- */
 @media (max-width: 480px) {
   .nav-container {
     padding: 0.75rem 1rem;
@@ -1050,10 +1089,7 @@ section {
   }
 
   .about-card,
-  .contact-form {
-    padding: 1.5rem;
-  }
-
+  .contact-form,
   .project-card {
     padding: 1.5rem;
   }
@@ -1067,7 +1103,10 @@ section {
   }
 }
 
-/* Scrollbar Styling */
+/* =================================================================
+   14. MISCELLANEOUS STYLES
+   ================================================================= */
+/* --- Scrollbar Styling --- */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -1085,13 +1124,13 @@ section {
   background: var(--ai-accent);
 }
 
-/* Selection styling */
+/* --- Text Selection Styling --- */
 ::selection {
   background: var(--ai-primary);
   color: var(--color-black);
 }
 
-/* Focus styles for accessibility */
+/* --- Accessibility Focus Styling --- */
 *:focus-visible {
   outline: 2px solid var(--ai-primary);
   outline-offset: 2px;
