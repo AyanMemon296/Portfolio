@@ -341,8 +341,76 @@ function initSmoothScrolling() {
 
 // Form validation and submission
 function initFormValidation() {
-    // This function is now empty because FormSubmit.co handles everything.
-    // The browser's built-in 'required' attribute will handle validation.
+    const contactForm = document.getElementById('contact-form');
+    const modal = document.getElementById('success-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+
+    if (!contactForm || !modal) return;
+
+    contactForm.addEventListener('submit', function(e) {
+        // 1. Prevent the default page reload
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
+
+        // Disable button and show sending status
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>`;
+
+        // 2. Send the form data to FormSubmit in the background
+        fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // 3. If submission is successful:
+                // Show the success modal
+                modal.classList.remove('hidden');
+                modal.classList.add('show');
+                // Reset the form fields
+                contactForm.reset();
+                // Scroll the page smoothly to the top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                // If there's an error
+                alert('Oops! There was a problem submitting your form. Please try again later.');
+            }
+        })
+        .catch(error => {
+            // If there's a network error
+            console.error('Submission Error:', error);
+            alert('Oops! There was a network problem. Please check your connection and try again.');
+        })
+        .finally(() => {
+            // Re-enable the submit button and restore its text
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        });
+    });
+
+    // Logic to close the success modal
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+            modal.classList.add('hidden');
+        });
+    }
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+            modal.classList.add('hidden');
+        }
+    });
 }
 
 // Scroll animations for elements
