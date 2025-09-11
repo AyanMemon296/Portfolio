@@ -341,57 +341,8 @@ function initSmoothScrolling() {
 
 // Form validation and submission
 function initFormValidation() {
-    const contactForm = document.getElementById('contact-form');
-    const modal = document.getElementById('success-modal');
-    const closeModalBtn = document.getElementById('close-modal');
-    
-    if (!contactForm || !modal) return;
-    
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const name = contactForm.querySelector('#name').value;
-        const email = contactForm.querySelector('#email').value;
-        const message = contactForm.querySelector('#message').value;
-        const subject = contactForm.querySelector('#subject').value;
-
-        if (name && email && message && subject) {
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                contactForm.reset();
-                modal.classList.remove('hidden');
-                modal.classList.add('show');
-                
-                setTimeout(() => {
-                    modal.classList.remove('show');
-                    modal.classList.add('hidden');
-                }, 5000);
-            }, 2000);
-        } else {
-            alert('Please fill out all fields before sending.');
-        }
-    });
-    
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', () => {
-            modal.classList.remove('show');
-            modal.classList.add('hidden');
-        });
-    }
-    
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('show');
-            modal.classList.add('hidden');
-        }
-    });
+    // This function is now empty because FormSubmit.co handles everything.
+    // The browser's built-in 'required' attribute will handle validation.
 }
 
 // Scroll animations for elements
